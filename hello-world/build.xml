@@ -29,8 +29,8 @@
 
 	  <ivy:retrieve pattern="${ivy.lib.dir}/[conf]/[artifact].[ext]"/>
 
-	  <cachefileset id="compile.classpath" dir="${ivy.cache.dir}" includes="${ivy.resolved.configurations.compile.files}"/>
-	  <cachefileset id="test.classpath" dir="${ivy.cache.dir}" includes="${ivy.resolved.configurations.test.files}"/>
+	  <ivy:cachefileset setid="compile.classpath" conf="compile"  />
+	  <ivy:cachefileset setid="test.classpath" conf="test"/>
 
     </target>
 	
