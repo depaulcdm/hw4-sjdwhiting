@@ -29,10 +29,13 @@ dependencies {
 
 jar {
     baseName = project.name + '-all'
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it)}
-    }
+
     manifest {
         attributes 'Main-Class': 'hello.HelloWorld'
     }
+
+    from {
+        configurations.runtimeClasspath.findAll { it.name.endsWith('jar')}.collect {zipTree(it)}
+    }
+    
 }
