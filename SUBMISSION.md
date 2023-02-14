@@ -26,6 +26,7 @@ The first argument is the Alt-text for the image. The second argument is the pat
 
 # Maven [30 pts]
 - [5 pts] A screen capture showing the version of Maven that you installed and its install directory.
+![Screen Capture #5](images/mvn-v.png)
 - [10 pts] A screen capture showing a successful build using the Maven script.
 - [5 pts] A screen capture showing a successful execution of the JAR file created from the Maven build.
 - [10 pts] Links to the complete and correct [hello-world/pom.xml](hello-world/pom.xml) file.
