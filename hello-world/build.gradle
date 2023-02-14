@@ -30,7 +30,7 @@ dependencies {
 jar {
     baseName = project.name + '-all'
     from {
-        configurations.runtimeClasspath.findAll { it.name-endsWith('jar')}.collect {zipTree(it)}
+        configurations.compile.collect { it.isDirectory() ? it : zipTree(it)}
     }
     manifest {
         attributes 'Main-Class': 'hello.HelloWorld'
