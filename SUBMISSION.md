@@ -1,7 +1,9 @@
 # Instructions
-**TODO:** Replace this line with your name and student ID.
+
+Sebastian Whiting - Student ID: 1222133
 
 **TODO:** Add your screen captures to a new directory called [images](images).
+Done!
 
 **HINT:** Embed your screen captures as requested in the sections below. You can embed the image using the following syntax:
 
