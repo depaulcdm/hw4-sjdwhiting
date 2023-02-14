@@ -63,7 +63,7 @@
 		and a second pathelement of the 'classes.test.dir' property.
 		-->
 		<classpath>
-		  <fileset refid="classes.test" />
+		  <fileset refid="test.classpath" />
 		  <pathelement path="${classes.dir}" />
 		</classpath>
 	  </javac>
