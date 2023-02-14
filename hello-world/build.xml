@@ -26,25 +26,35 @@
 	  the 'test' configuration. The ID of the first cachefileset should be 'compile.classpath'
 	  and the ID of the second should be 'test.classpath'.
 	  -->
+
+	  <ivy:retrieve pattern="${ivy.lib.dir}/[conf]/[artifact].[ext]"/>
+
+	  <cachefileset id="compile.classpath" dir="${ivy.cache.dir}" includes="${ivy.resolved.configurations.compile.files}"/>
+	  <cachefileset id="test.classpath" dir="${ivy.cache.dir}" includes="${ivy.resolved.configurations.test.files}"/>
+
     </target>
 	
 	<!--
 	TODO: Make this target depend on the 'clean' and 'resolve' targets.
 	-->
-	<target name="compile">
+	<target name="compile" depends="clean, resolve">
 	  <mkdir dir="${classes.dir}"/>
 	  <javac srcdir="${src.dir}" destdir="${classes.dir}">
 	    <!--
 		TODO: Define the classpath to be a combination of the 'compile.classpath' fileset
 		created by the "resolve" target above and a pathelement of the 'classes.dir' property.
 		-->
+		<classpath>
+		  <fileset refid="compile.classpath" />
+		  <pathelement path="${classes.dir}" />
+		</classpath>
 	  </javac>
 	</target>
 
 	<!--
 	TODO: Make this target depend on the 'compile' target.
 	-->
-	<target name="test-compile">
+	<target name="test-compile" depends="compile">
 	  <mkdir dir="${classes.test.dir}"/>
 	  <javac srcdir="${src.test.dir}" destdir="${classes.test.dir}">
 	    <!--
@@ -52,6 +62,10 @@
 		created by the "resolve" target above, a pathelement of the 'classes.dir' property,
 		and a second pathelement of the 'classes.test.dir' property.
 		-->
+		<classpath>
+		  <fileset refid="classes.test" />
+		  <pathelement path="${classes.dir}" />
+		</classpath>
 	  </javac>
 	</target>
 
@@ -63,6 +77,11 @@
             created by the "resolve" target above, a pathelement of the 'classes.dir' property,
             and a second pathelement of the 'classes.test.dir' property.
             -->
+			<classpath>
+			  <fileset refid="test.classpath" />
+			  <pathelement path="${classes.dir}" />
+			  <pathelement path="${classes.test.dir}" />
+			</classpath>
             <formatter type="plain" />        
             <batchtest fork="yes" todir="${reports.dir}">
               <fileset dir="${src.test.dir}">
@@ -75,7 +94,7 @@
 	<!--
 	TODO: Make this target depend on the 'test' target.
 	-->
-	<target name="jar">
+	<target name="jar" depends="test">
           <ivy:cachefileset setid="hello.runclasspath" conf="compile" />
           <jar destfile="${jar.file}" basedir="${classes.dir}">
             <manifest>
